@@ -132,7 +132,35 @@
     scale="0.04 0.04 0.04">
 </a-entity>
 
+<a-entity light="type: point; intensity: 0.9; distance: 8; decay: 1" 
+          position="0 3 0">
+</a-entity>
 
+<a-entity light="type: point; color: #ffddaa; intensity: 0.6; distance: 5"
+          position="-3 1.5 -1">
+</a-entity>
+
+<!-- LEFT Yamaha HS3 Monitor (larger + raised) -->
+<a-entity position="-1.6 1.55 -2 " scale="1.9 1.9 1.9">
+  <a-box width="0.35" height="0.60" depth="0.32" color="#ffffff"></a-box>
+
+  <!-- Woofer -->
+  <a-cylinder position="0 0.0 0.18" radius="0.13" height="0.01" color="#111" rotation="90 0 0"></a-cylinder>
+
+  <!-- Tweeter -->
+  <a-cylinder position="0 0.18 0.18" radius="0.045" height="0.01" color="#111" rotation="90 0 0"></a-cylinder>
+</a-entity>
+
+<!-- RIGHT Yamaha HS3 Monitor (larger + raised) -->
+<a-entity position="1.6 1.55 -2" scale="1.9 1.9 1.9">
+  <a-box width="0.35" height="0.60" depth="0.32" color="#ffffff"></a-box>
+
+  <!-- Woofer -->
+  <a-cylinder position="0 0.0 .18" radius="0.13" height="0.01" color="#111" rotation="90 0 0"></a-cylinder>
+
+  <!-- Tweeter -->
+  <a-cylinder position="0 0.18 .18" radius="0.045" height="0.01" color="#111" rotation="90 0 0"></a-cylinder>
+</a-entity>
 
 
       <!-- Placeholders for generated pianos -->
