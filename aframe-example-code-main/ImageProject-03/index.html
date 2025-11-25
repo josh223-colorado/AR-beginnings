@@ -13,6 +13,10 @@
       <a-assets>
         <img id="wallTexture" src="assets/wallTexture.jpg.png">
         <img id="ceilingTexture" src="assets/ceilingTexture.jpg.png">
+
+        <a-asset-item id="tv-obj" src="assets/TV.obj"></a-asset-item>
+        <a-asset-item id="chair-obj" src="assets/Chair.obj"></a-asset-item>
+
       </a-assets>
 
       <!-- FLOOR & CEILING -->
@@ -107,6 +111,25 @@
   <a-cylinder radius="0.5" height="0.06" color="#222222"
               position="0 0 0.24" rotation="90 0 0"></a-cylinder>
 
+</a-entity>
+
+
+<!-- Desk monitor bigger and centered -->
+<a-entity 
+    obj-model="obj: #tv-obj"
+    position="0 1.8 -2"
+    rotation="0 0 0"
+    scale="1 1 1">
+</a-entity>
+
+
+
+<!-- Chair correctly placed in front of desk -->
+<a-entity 
+    obj-model="obj: #chair-obj"
+    position="0 0.3 -0.5"
+    rotation="0 245 0"
+    scale="0.04 0.04 0.04">
 </a-entity>
 
 
