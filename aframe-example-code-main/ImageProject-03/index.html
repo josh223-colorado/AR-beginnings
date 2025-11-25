@@ -1,107 +1,265 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VR Studio Room - A-Frame</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>VR Studio Room - Piano + Speakers (Inspired)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="main.css">
   </head>
 
   <body>
-    <a-scene>
-
-      <!-- ASSETS -->
+    <a-scene background="color: #efefef">
+      <!-- ASSETS (using your uploaded screenshots as textures) -->
       <a-assets>
         <img id="wallTexture" src="assets/wallTexture.jpg.png">
         <img id="ceilingTexture" src="assets/ceilingTexture.jpg.png">
       </a-assets>
 
-      <!-- FLOOR -->
-      <a-plane 
-        position="0 0 0"
-        rotation="-90 0 0"
-        width="14" height="14"
-        color="#f0f0f0">
-      </a-plane>
+      <!-- FLOOR & CEILING -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="14" height="14" color="#fbfbfb"></a-plane>
+      <a-plane position="0 6.5 0" rotation="90 0 0" width="14" height="14" material="src: #ceilingTexture; repeat: 6 6"></a-plane>
 
-      <!-- TALLER CEILING (height 6.5) -->
-      <a-plane 
-        position="0 6.5 0"
-        rotation="90 0 0"
-        width="14" height="14"
-        material="src: #ceilingTexture; repeat: 5 5; metalness:0.1; roughness:0.8;">
-      </a-plane>
+      <!-- WALLS (textured) -->
+      <a-box position="0 3.25 -7" width="14" height="6.5" depth="0.3" material="src: #wallTexture; repeat: 5 2"></a-box>
+      <a-box position="0 3.25 7" rotation="0 180 0" width="14" height="6.5" depth="0.3" material="src: #wallTexture; repeat: 5 2"></a-box>
+      <a-box position="-7 3.25 0" rotation="0 90 0" width="14" height="6.5" depth="0.3" material="src: #wallTexture; repeat: 5 2"></a-box>
+      <a-box position="7 3.25 0" rotation="0 -90 0" width="14" height="6.5" depth="0.3" material="src: #wallTexture; repeat: 5 2"></a-box>
 
-      <!-- WALLS (6.5 units tall) -->
-      <a-plane position="0 3.25 -7" rotation="0 0 0" width="14" height="6.5"
-               material="src: #wallTexture; repeat: 5 2;"></a-plane>
+  <!-- Monitor (3D, touching back wall) -->
+    <a-box position="0 3.4 -6.80"
+       width="4.8"
+       height="2.7"
+       depth="0.15"
+       color="#111"></a-box>
 
-      <a-plane position="0 3.25 7" rotation="0 180 0" width="14" height="6.5"
-               material="src: #wallTexture; repeat: 5 2;"></a-plane>
 
-      <a-plane position="-7 3.25 0" rotation="0 90 0" width="14" height="6.5"
-               material="src: #wallTexture; repeat: 5 2;"></a-plane>
+      <!-- Door on the backside (center back wall) as requested -->
+      <a-box position="0 1.75 6.85" width="1.5" height="3" depth="0.2" color="#ffffff" material="metalness:0.0; roughness:0.7"></a-box>
+      <a-circle position="0.6 1.75 6.99" radius="0.06" rotation="0 0 0" color="#c6c6c6"></a-circle>
 
-      <a-plane position="7 3.25 0" rotation="0 -90 0" width="14" height="6.5"
-               material="src: #wallTexture; repeat: 5 2;"></a-plane>
+      <!-- Desk and small items (kept similar to your original) -->
+      <a-box id="desk-center" position="0 1.1 -2" width="3.8" height="0.2" depth="1.6" color="#dcdcdc"></a-box>
+      <a-box position="-2.1 1.1 -2" width="1.6" height="0.2" depth="1.4" color="#dcdcdc"></a-box>
+      <a-box position="2.1 1.1 -2" width="1.6" height="0.2" depth="1.4" color="#dcdcdc"></a-box>
 
-      <!-- ============ DESK CONTROL CENTER ============ -->
+      <!-- Shelves on the right side (kept) -->
+      <a-box position="5 -1.25 -1" rotation="0 90 0" width="3.5" height="0.15" depth="1.1" color="#d0d0d0"></a-box>
+      <a-box position="5 -1.25 0.8" rotation="0 90 0" width="3.5" height="0.15" depth="1.1" color="#d0d0d0"></a-box>
+      <a-box position="5 -1.25 2.4" rotation="0 90 0" width="3.5" height="0.15" depth="1.1" color="#d0d0d0"></a-box>
 
-      <!-- Center Desk Surface -->
-      <a-box position="0 0.75 -2"
-             depth="1.2" height="0.1" width="2.4"
-             color="#e6e6e6"
-             material="roughness:0.8; metalness:0.1;">
-      </a-box>
+      <!-- Lighting -->
+      <a-entity light="type: ambient; intensity: 0.35"></a-entity>
+      <a-entity light="type: spot; intensity: 0.95; angle: 60; penumbra: 0.2; position: 0 6 0; target: #desk-center"></a-entity>
 
-      <!-- Left Console -->
-      <a-box position="-1.3 0.7 -2"
-             depth="1" height="0.5" width="1"
-             rotation="-20 0 0"
-             color="#e6e6e6">
-      </a-box>
-
-      <!-- Right Console -->
-      <a-box position="1.3 0.7 -2"
-             depth="1" height="0.5" width="1"
-             rotation="-20 0 0"
-             color="#e6e6e6">
-      </a-box>
-
-      <!-- Center Monitor -->
-      <a-plane position="0 1.65 -2.2"
-               width="1.8" height="1"
-               color="#000000"
-               material="shader: flat;">
-      </a-plane>
-
-      <!-- Left Control Screen -->
-      <a-plane position="-1.25 1.1 -2.1"
-               rotation="-15 0 0"
-               width="0.9" height="0.5"
-               color="#111">
-      </a-plane>
-
-      <!-- Right Control Screen -->
-      <a-plane position="1.25 1.1 -2.1"
-               rotation="-15 0 0"
-               width="0.9" height="0.5"
-               color="#111">
-      </a-plane>
-
-      <!-- ============ LIGHTING ============ -->
-      <a-entity light="type: ambient; intensity: 0.6"></a-entity>
-
-      <!-- Spotlights overhead -->
-      <a-entity light="type: spot; intensity: 1; angle:40" position="0 6.3 0"></a-entity>
-      <a-entity light="type: spot; intensity: 1; angle:40" position="-2 6.3 -1"></a-entity>
-      <a-entity light="type: spot; intensity: 1; angle:40" position="2 6.3 1"></a-entity>
-
-      <!-- CAMERA -->
-      <a-entity position="0 1.6 2.5">
-        <a-camera wasd-controls look-controls></a-camera>
+      <!-- Camera -->
+      <a-entity position="0 1.6 5">
+        <a-camera orbit-controls="target: 0 1.6 -2; enableDamping: true; dampingFactor: 0.25; rotateSpeed:0.3"></a-camera>
       </a-entity>
 
+<!-- ======================= -->
+<!--   LEFT WALL SPEAKER     -->
+<!-- ======================= -->
+<a-entity id="left-wall-speaker"
+          position="-3.3 3.4 -6.80"
+          rotation="0 0 0">
+
+  <!-- Speaker Body -->
+  <a-box width="1.4" height="2" depth="0.45" color="#FFFFFF"></a-box>
+
+  <!-- Corner Cylinders -->
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="-0.65 0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="0.65 0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="-0.65 -0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="0.65 -0.95 0.24" rotation="90 0 0"></a-cylinder>
+
+  <!-- Center Driver -->
+  <a-cylinder radius="0.5" height="0.06" color="#222222"
+              position="0 0 0.24" rotation="90 0 0"></a-cylinder>
+
+</a-entity>
+
+
+<!-- ======================= -->
+<!--   RIGHT WALL SPEAKER    -->
+<!-- ======================= -->
+<a-entity id="right-wall-speaker"
+          position="3.3 3.4 -6.80"
+          rotation="0 0 0">
+
+  <!-- Speaker Body -->
+  <a-box width="1.4" height="2" depth="0.45" color="#FFFFFF"></a-box>
+
+  <!-- Corner Cylinders -->
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="-0.65 0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="0.65 0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="-0.65 -0.95 0.24" rotation="90 0 0"></a-cylinder>
+  <a-cylinder radius="0.1" height="0.06" color="#000000"
+              position="0.65 -0.95 0.24" rotation="90 0 0"></a-cylinder>
+
+  <!-- Center Driver -->
+  <a-cylinder radius="0.5" height="0.06" color="#222222"
+              position="0 0 0.24" rotation="90 0 0"></a-cylinder>
+
+</a-entity>
+
+
+
+
+      <!-- Placeholders for generated pianos -->
+      <a-entity id="piano-container"></a-entity>
+
+      <script>
+        (function () {
+          // Piano generation parameters (real-world 48 inches = 1.2192 meters)
+          const pianoLength = 1.2192; // meters (total length across all white keys)
+          const whiteKeyCount = 52;   // # of white keys in an 88-key piano
+          const blackKeyCount = 36;
+          const whiteKeyWidth = pianoLength / whiteKeyCount; // spacing for each white key
+          const whiteKeyDepth = 0.25; // depth of each white key (front->back)
+          const whiteKeyHeight = 0.08;
+          const blackKeyWidth = whiteKeyWidth * 0.62;
+          const blackKeyDepth = whiteKeyDepth * 0.62;
+          const blackKeyHeight = whiteKeyHeight + 0.04;
+
+          // black key pattern relative to white keys (per octave)
+          // We will create an 88-key layout by iterating white keys and placing black keys where needed.
+          // Pattern: for white indexes within an octave (C..B): blacks after keys 0(C),1(D),3(F),4(G),5(A)
+          const blackOffsetIndices = [0, 1, 3, 4, 5];
+
+          // convenient function to create an a-entity
+          const createBox = (attrs) => {
+            const el = document.createElement('a-box');
+            for (const k in attrs) el.setAttribute(k, attrs[k]);
+            return el;
+          };
+
+          // We'll create two pianos positioned near the left and right sides of the room (like studio setups)
+          const pianos = [
+            { id: 'piano-left', position: { x: -3.5, y: 1.02, z: -3 }, rotation: '0 20 0' },
+            { id: 'piano-right', position: { x: 3.5, y: 1.02, z: -3 }, rotation: '0 -20 0' }
+          ];
+
+          const container = document.querySelector('#piano-container');
+
+          pianos.forEach((pianoSpec, pianoIndex) => {
+            const pianoRoot = document.createElement('a-entity');
+            pianoRoot.setAttribute('id', pianoSpec.id);
+            pianoRoot.setAttribute('position', `${pianoSpec.position.x} ${pianoSpec.position.y} ${pianoSpec.position.z}`);
+            pianoRoot.setAttribute('rotation', pianoSpec.rotation);
+
+            // Piano top/body base
+            const body = createBox({
+              width: pianoLength + 0.08,
+              height: 0.18,
+              depth: whiteKeyDepth + 0.34,
+              color: '#f7f7f7',
+              position: `0 ${-0.09} 0`,
+              material: 'metalness:0.0; roughness:0.6'
+            });
+            pianoRoot.appendChild(body);
+
+            // keyboard platform (slightly inset)
+            const keyboardPlatform = createBox({
+              width: pianoLength + 0.02,
+              height: 0.02,
+              depth: whiteKeyDepth + 0.12,
+              color: '#ffffff',
+              position: `0 0.01 0`,
+              material: 'metalness:0.0; roughness:0.35'
+            });
+            pianoRoot.appendChild(keyboardPlatform);
+
+            // We'll center the keys along the piano root's X axis.
+            // Start x at -(pianoLength/2) + whiteKeyWidth/2 and increment by whiteKeyWidth per white key.
+            let whiteIndex = 0;
+            let totalWhite = whiteKeyCount;
+            const startX = -pianoLength / 2 + whiteKeyWidth / 2;
+
+            // Keep track of white key world positions so we can place black keys between them where needed.
+            const whiteKeyPositions = [];
+
+            for (let w = 0; w < totalWhite; w++) {
+              const x = startX + w * whiteKeyWidth;
+              whiteKeyPositions.push(x);
+              const whiteKey = createBox({
+                width: whiteKeyWidth * 0.98,
+                height: whiteKeyHeight,
+                depth: whiteKeyDepth,
+                color: '#ffffff',
+                position: `${x} ${whiteKeyHeight / 2 + 0.02} 0.06`,
+                material: 'metalness:0.0; roughness:0.45'
+              });
+              pianoRoot.appendChild(whiteKey);
+            }
+
+            // Now place black keys following standard pattern across the 52 whites.
+            // We'll create black keys by iterating octaves. 52 whites = 7 full octaves + extra keys.
+            // For positioning we use the whiteKeyPositions indexes
+            const blacks = [];
+            const isBlackSlot = (whitePosIndex) => {
+              // For each white index in an octave [0..6], check if a black key sits after it (pattern indices)
+              const octaveIndex = whitePosIndex % 7;
+              return blackOffsetIndices.includes(octaveIndex);
+            };
+
+            // black keys are placed between whites: we'll iterate through white key positions and, for those indices
+            // that should have a black key after them, place one slightly forward and higher.
+            for (let i = 0; i < whiteKeyPositions.length - 1; i++) {
+              // Using a repeating 7-white-key octave pattern: C D E F G A B -> black keys after C,D, F,G,A
+              if (isBlackSlot(i)) {
+                const x = whiteKeyPositions[i] + whiteKeyWidth * 0.5;
+                const blackKey = createBox({
+                  width: blackKeyWidth,
+                  height: blackKeyHeight,
+                  depth: blackKeyDepth,
+                  color: '#000000',
+                  position: `${x} ${blackKeyHeight / 2 + 0.03} -0.02`,
+                  material: 'metalness:0.0; roughness:0.25'
+                });
+                pianoRoot.appendChild(blackKey);
+                blacks.push(blackKey);
+              }
+            }
+
+            // Add a small keyboard front lip for realism
+            const frontLip = createBox({
+              width: pianoLength + 0.02,
+              height: 0.04,
+              depth: 0.02,
+              color: '#e9e9e9',
+              position: `0 ${whiteKeyHeight + 0.04} ${whiteKeyDepth / 2 + 0.01}`,
+              material: 'metalness:0.0; roughness:0.65'
+            });
+            pianoRoot.appendChild(frontLip);
+
+            // add legs to the piano body (simple columns)
+            const legPositions = [-pianoLength / 2 + 0.12, pianoLength / 2 - 0.12];
+            legPositions.forEach((lx) => {
+              const leg = createBox({
+                width: 0.08,
+                height: 0.9,
+                depth: 0.08,
+                color: '#d0d0d0',
+                position: `${lx} ${-0.55} 0.3`,
+                material: 'metalness:0.0; roughness:0.7'
+              });
+              pianoRoot.appendChild(leg);
+            });
+
+            // append to container
+            container.appendChild(pianoRoot);
+          });
+        })();
+      </script>
     </a-scene>
   </body>
 </html>
+
+
